@@ -1,0 +1,542 @@
+2020-12-21T19:06:31.2526925+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:06:31.2526841+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:06:31.4472847+05:00  [INF] Executed DbCommand ("18"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""PRAGMA journal_mode = 'wal';" (0723d8ff)
+2020-12-21T19:06:31.5501740+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"Apps\" (
+    \"Id\" INTEGER NOT NULL CONSTRAINT \"PK_Apps\" PRIMARY KEY AUTOINCREMENT,
+    \"AppName\" TEXT NULL
+);" (0723d8ff)
+2020-12-21T19:06:31.5503663+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"Files\" (
+    \"Id\" INTEGER NOT NULL CONSTRAINT \"PK_Files\" PRIMARY KEY AUTOINCREMENT,
+    \"Name\" TEXT NULL,
+    \"Run\" INTEGER NOT NULL,
+    \"AppId\" INTEGER NULL,
+    CONSTRAINT \"FK_Files_Apps_AppId\" FOREIGN KEY (\"AppId\") REFERENCES \"Apps\" (\"Id\") ON DELETE RESTRICT
+);" (0723d8ff)
+2020-12-21T19:06:31.5504485+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"Revisions\" (
+    \"Id\" INTEGER NOT NULL CONSTRAINT \"PK_Revisions\" PRIMARY KEY AUTOINCREMENT,
+    \"Rev\" INTEGER NOT NULL,
+    \"FileId\" INTEGER NULL,
+    CONSTRAINT \"FK_Revisions_Files_FileId\" FOREIGN KEY (\"FileId\") REFERENCES \"Files\" (\"Id\") ON DELETE RESTRICT
+);" (0723d8ff)
+2020-12-21T19:06:31.5505998+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX \"IX_Files_AppId\" ON \"Files\" (\"AppId\");" (0723d8ff)
+2020-12-21T19:06:31.5506783+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE INDEX \"IX_Revisions_FileId\" ON \"Revisions\" (\"FileId\");" (0723d8ff)
+2020-12-21T19:06:31.5752092+05:00  [INF] Executed DbCommand ("163"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""PRAGMA journal_mode = 'wal';" (0723d8ff)
+2020-12-21T19:06:31.5813729+05:00  [ERR] Failed executing DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"Apps\" (
+    \"Id\" INTEGER NOT NULL CONSTRAINT \"PK_Apps\" PRIMARY KEY AUTOINCREMENT,
+    \"AppName\" TEXT NULL
+);" (627a98df)
+2020-12-21T19:08:28.5168862+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:28.5168862+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:28.7025367+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:28.8387120+05:00  [INF] Executed DbCommand ("161"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:28.9837601+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:28.9844604+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:37.4250863+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:37.4320370+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:37.4593112+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__nm_0='?' (Size = 12)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\"
+FROM \"Apps\" AS \"a\"
+WHERE \"a\".\"AppName\" = @__nm_0
+LIMIT 1" (0723d8ff)
+2020-12-21T19:08:37.5760504+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@p0='?' (Size = 12)"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Apps\" (\"AppName\")
+VALUES (@p0);
+SELECT \"Id\"
+FROM \"Apps\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:37.6085892+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__nm_0='?' (Size = 12)"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\"
+FROM \"Apps\" AS \"a\"
+WHERE \"a\".\"AppName\" = @__nm_0
+LIMIT 1" (0723d8ff)
+2020-12-21T19:08:37.6142720+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:37.6164131+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:37.6189381+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:46.7635497+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:46.7663849+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:46.7840306+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__aid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__aid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Files\" AS \"f\" ON \"t\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:46.8179466+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?' (Size = 8), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Files\" (\"AppId\", \"Name\", \"Run\")
+VALUES (@p0, @p1, @p2);
+SELECT \"Id\"
+FROM \"Files\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:46.8405704+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:46.8426744+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:46.8533386+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__fid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppId\", \"t\".\"Name\", \"t\".\"Run\", \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+    FROM \"Files\" AS \"f\"
+    WHERE \"f\".\"Id\" = @__fid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Revisions\" AS \"r\" ON \"t\".\"Id\" = \"r\".\"FileId\"
+ORDER BY \"t\".\"Id\", \"r\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:46.8658850+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Revisions\" (\"FileId\", \"Rev\")
+VALUES (@p0, @p1);
+SELECT \"Id\"
+FROM \"Revisions\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:47.4744262+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:47.4779762+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:47.4827654+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__aid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__aid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Files\" AS \"f\" ON \"t\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:47.4883108+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?' (Size = 13), @p2='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Files\" (\"AppId\", \"Name\", \"Run\")
+VALUES (@p0, @p1, @p2);
+SELECT \"Id\"
+FROM \"Files\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:47.4970705+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:47.4992127+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:47.5022245+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__fid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppId\", \"t\".\"Name\", \"t\".\"Run\", \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+    FROM \"Files\" AS \"f\"
+    WHERE \"f\".\"Id\" = @__fid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Revisions\" AS \"r\" ON \"t\".\"Id\" = \"r\".\"FileId\"
+ORDER BY \"t\".\"Id\", \"r\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:47.5057819+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Revisions\" (\"FileId\", \"Rev\")
+VALUES (@p0, @p1);
+SELECT \"Id\"
+FROM \"Revisions\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:47.5147989+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:47.5181090+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:47.5215292+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:50.5766766+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:50.5803793+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:50.5856929+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__aid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__aid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Files\" AS \"f\" ON \"t\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:50.5906189+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:50.5941238+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:50.5981667+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__fid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppId\", \"t\".\"Name\", \"t\".\"Run\", \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+    FROM \"Files\" AS \"f\"
+    WHERE \"f\".\"Id\" = @__fid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Revisions\" AS \"r\" ON \"t\".\"Id\" = \"r\".\"FileId\"
+ORDER BY \"t\".\"Id\", \"r\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:50.6038401+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Revisions\" (\"FileId\", \"Rev\")
+VALUES (@p0, @p1);
+SELECT \"Id\"
+FROM \"Revisions\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:50.6124652+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:50.6145951+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:50.6173112+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:53.3446349+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:53.3474234+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:53.3506129+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__aid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__aid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Files\" AS \"f\" ON \"t\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:53.3543259+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:53.3567622+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:53.3595502+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=["@__fid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppId\", \"t\".\"Name\", \"t\".\"Run\", \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+    FROM \"Files\" AS \"f\"
+    WHERE \"f\".\"Id\" = @__fid_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN \"Revisions\" AS \"r\" ON \"t\".\"Id\" = \"r\".\"FileId\"
+ORDER BY \"t\".\"Id\", \"r\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:53.3639818+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p0='?', @p1='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Revisions\" (\"FileId\", \"Rev\")
+VALUES (@p0, @p1);
+SELECT \"Id\"
+FROM \"Revisions\"
+WHERE changes() = 1 AND \"rowid\" = last_insert_rowid();" (0723d8ff)
+2020-12-21T19:08:53.3715456+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:53.3735608+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:53.3762864+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:08:55.7911827+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:08:55.7940264+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:08:55.8002974+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=["@__fid_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Files\" AS \"f\"
+WHERE \"f\".\"Id\" = @__fid_0
+LIMIT 1" (0723d8ff)
+2020-12-21T19:08:55.8071711+05:00  [INF] Executed DbCommand ("0"ms) [Parameters=["@p1='?', @p0='?'"], CommandType='Text', CommandTimeout='30']"
+""UPDATE \"Files\" SET \"Run\" = @p0
+WHERE \"Id\" = @p1;
+SELECT changes();" (0723d8ff)
+2020-12-21T19:09:29.0340118+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:09:29.0340118+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:09:29.2234555+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:09:29.2235073+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:09:29.3930974+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:09:29.4821603+05:00  [INF] Executed DbCommand ("5"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:09:29.4824540+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:09:29.5615737+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:09:29.6026455+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:10:13.5341339+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:10:13.5341355+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:10:13.7380664+05:00  [INF] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:10:13.7380588+05:00  [INF] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:10:17.1252853+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:10:17.2108523+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:10:17.2111407+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:10:30.1211672+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:10:45.8339674+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:11:57.3653085+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:11:57.3652985+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:11:57.5537394+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:11:57.5537394+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:12:03.1236707+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:12:03.2139327+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:12:03.2139327+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:12:03.2898318+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:12:03.3161089+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:29:13.4310318+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:29:13.4310060+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:29:13.6908442+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:29:13.6908572+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:29:13.8592899+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:29:13.9500037+05:00  [INF] Executed DbCommand ("5"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:29:13.9503542+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:29:14.0284078+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:29:14.0742137+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:30:17.8494458+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:30:17.8494752+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:30:18.0317178+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:30:18.0317150+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:30:18.2006550+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:30:18.2863995+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:30:18.2871320+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:30:18.3621106+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:30:18.3875950+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:30:55.4951810+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:30:55.4951810+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:30:55.6774444+05:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:30:55.6774444+05:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:30:55.8460249+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:30:55.9354788+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:30:55.9358493+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:30:56.0094931+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:30:56.0344027+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:31:29.3589957+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:31:29.3589933+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:31:29.5476429+05:00  [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:31:29.5477042+05:00  [INF] Executed DbCommand ("12"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:31:29.7188662+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:31:29.8111798+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:31:29.8116867+05:00  [INF] Executed DbCommand ("3"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:31:29.8917886+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:31:29.9187609+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:34:33.8525924+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:34:33.8526081+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:34:34.0302979+05:00  [INF] Executed DbCommand ("10"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:34:34.0303005+05:00  [INF] Executed DbCommand ("10"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:34:34.1893643+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:34:34.2740645+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:34:34.2742549+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:34:34.3527897+05:00  [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:34:34.3796486+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:36:58.2369278+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:36:58.2369241+05:00  [INF] Entity Framework Core "5.0.1" initialized '"DbAppContext"' using provider '"Microsoft.EntityFrameworkCore.Sqlite"' with options: "None" (9958f5bb)
+2020-12-21T19:36:58.4194761+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:36:58.4194812+05:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*) FROM \"sqlite_master\" WHERE \"type\" = 'table' AND \"rootpage\" IS NOT NULL;" (0723d8ff)
+2020-12-21T19:36:58.5865485+05:00  [WRN] Compiling a query which loads related collections for more than one collection navigation either via 'Include' or through projection but no 'QuerySplittingBehavior' has been configured. By default Entity Framework will use 'QuerySplittingBehavior.SingleQuery' which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))' (74d62de4)
+2020-12-21T19:36:58.6729913+05:00  [INF] Executed DbCommand ("4"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT \"t\".\"Id\", \"t\".\"AppName\", \"t0\".\"Id\", \"t0\".\"AppId\", \"t0\".\"Name\", \"t0\".\"Run\", \"t0\".\"Id0\", \"t0\".\"FileId\", \"t0\".\"Rev\"
+FROM (
+    SELECT \"a\".\"Id\", \"a\".\"AppName\"
+    FROM \"Apps\" AS \"a\"
+    WHERE \"a\".\"Id\" = @__id_0
+    LIMIT 1
+) AS \"t\"
+LEFT JOIN (
+    SELECT \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\", \"r\".\"Id\" AS \"Id0\", \"r\".\"FileId\", \"r\".\"Rev\"
+    FROM \"Files\" AS \"f\"
+    LEFT JOIN \"Revisions\" AS \"r\" ON \"f\".\"Id\" = \"r\".\"FileId\"
+) AS \"t0\" ON \"t\".\"Id\" = \"t0\".\"AppId\"
+ORDER BY \"t\".\"Id\", \"t0\".\"Id\", \"t0\".\"Id0\"" (0723d8ff)
+2020-12-21T19:36:58.6733288+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"a\".\"Id\", \"a\".\"AppName\", \"f\".\"Id\", \"f\".\"AppId\", \"f\".\"Name\", \"f\".\"Run\"
+FROM \"Apps\" AS \"a\"
+LEFT JOIN \"Files\" AS \"f\" ON \"a\".\"Id\" = \"f\".\"AppId\"
+ORDER BY \"a\".\"Id\", \"f\".\"Id\"" (0723d8ff)
+2020-12-21T19:36:58.7474956+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
+2020-12-21T19:36:58.7718200+05:00  [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT \"r\".\"Id\", \"r\".\"FileId\", \"r\".\"Rev\"
+FROM \"Revisions\" AS \"r\"" (0723d8ff)
